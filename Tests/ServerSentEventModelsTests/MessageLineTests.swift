@@ -49,7 +49,9 @@ final class MessageLineTests: XCTestCase {
 			("Comment with space on key", " :some event", .unknown(" ", "some event")),
 			("Key with newline", "ke\ny:some event", nil),
 			("Value with newline", "key:some\nevent", nil),
-			("Line with newline", "some\nevent", nil),
+			("Line with LF", "some\nevent", nil),
+			("Line with CRLF", "some\r\nevent", nil),
+			("Line with CR", "some\revent", nil),
 		]
 
 		for (description, input, expected) in tests {

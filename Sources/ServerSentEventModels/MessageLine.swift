@@ -1,17 +1,32 @@
 import Foundation
 
+/// A line in the raw stream of events.
 public enum MessageLine: Codable, Equatable {
+	/// The type of a message.
 	case event(String)
+
+	/// A line of data. Multiple lines of data is allowed in a message.
 	case data(String)
+
+	/// The ID of the message.
 	case id(String)
+
+	/// The number of milliseconds that the reconnection time must be set to.
 	case retry(Int)
+
+	/// A comment line. According to spec, comment lines should be ignored by browsers.
 	case comment(String)
+
+	/// Unknown key-value pair. This is present to allow lines not currently supported in the spec. The spec says that browsers should ignore unknown lines, so this is safe to include.
 	case unknown(String, String)
 }
 
 public extension MessageLine {
+	/// Creates a Line by parsing the raw input.
+	/// - parameter string:A raw input line.
+	/// - returns: A ``MessageLine`` of the appropriate type, ``MessageLine/unknown(_:_:)`` if an unknown or invalid key is present or `nil` if the line contains a newline character.
 	init?(string: String) {
-		guard !string.contains("\n")
+		guard !string.contains(where: \.isNewline)
 		else { return nil }
 
 		let key: String
@@ -45,6 +60,7 @@ public extension MessageLine {
 		}
 	}
 
+	/// Converts the ``MessageLine`` to a raw line.
 	var asString: String {
 		switch self {
 		case let .event(value):

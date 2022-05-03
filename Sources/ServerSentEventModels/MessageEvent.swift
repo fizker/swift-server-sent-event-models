@@ -1,9 +1,25 @@
+import Foundation
+
+/// A MessageEvent representing multiple ``MessageLine``.
+///
+/// An event consists of mulplie lines. A message must contain at least one line, but all line types are optional.
+///
+/// A message supports multiple ``MessageLine/data(_:)`` lines. For all other types, only the last instance should be respected.
+///
+/// It parses the list of line according to the rules listed in
+/// https://html.spec.whatwg.org/multipage/server-sent-events.html#event-stream-interpretation.
 public struct MessageEvent: Codable, Equatable {
+	/// The data that the message contains.
 	public var data: String
+	/// The type of message.
 	public var eventType: String?
+	/// The last received ID.
 	public var lastEventID: String?
+	/// The ID of the message.
 	public var id: String?
+	/// A number of milliseconds that the reconnection time should be set to.
 	public var retry: Int?
+	/// A number of comments that was included in the message.
 	public var comments: [String] = []
 
 	public init(
@@ -24,6 +40,7 @@ public struct MessageEvent: Codable, Equatable {
 }
 
 public extension MessageEvent {
+	/// Creates a new MessageEvent from a list of ``MessageLine``. If there is an ID line, ``lastEventID`` will be set to that result, even if it was given as a parameter.
 	init?(lines: [MessageLine], lastEventID: String?) {
 		var data: [String] = []
 		for line in lines {
@@ -47,6 +64,8 @@ public extension MessageEvent {
 		self.lastEventID = id ?? lastEventID
 	}
 
+	/// Converts the MessageEvent to a list of ``MessageLine``.
+	/// The order of the lines is deterministic. If more control is required, it is necessary to create the list manually.
 	var asLines: [MessageLine] {
 		var lines: [MessageLine] = []
 
