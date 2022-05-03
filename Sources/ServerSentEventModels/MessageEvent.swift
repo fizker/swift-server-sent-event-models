@@ -1,8 +1,20 @@
-public struct MessageEvent: Codable {
+public struct MessageEvent: Codable, Equatable {
 	public var data: String
 	public var eventType: String?
 	public var lastEventID: String?
 	public var id: String?
+
+	public init(
+		data: String,
+		eventType: String?,
+		lastEventID: String?,
+		id: String?
+	) {
+		self.data = data
+		self.eventType = eventType
+		self.lastEventID = lastEventID
+		self.id = id
+	}
 }
 
 public extension MessageEvent {
@@ -28,7 +40,10 @@ public extension MessageEvent {
 	var asLines: [MessageLine] {
 		var lines: [MessageLine] = []
 
-		lines.append(contentsOf: data.components(separatedBy: .newlines).map { .data($0) })
+		if !data.isEmpty {
+			lines.append(contentsOf: data.components(separatedBy: .newlines).map { .data($0) })
+		}
+
 		if let id = id {
 			lines.append(.id(id))
 		}
