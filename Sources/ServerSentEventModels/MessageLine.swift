@@ -1,6 +1,6 @@
 import Foundation
 
-public enum MessageLine: Codable {
+public enum MessageLine: Codable, Equatable {
 	case event(String)
 	case data(String)
 	case id(String)
@@ -11,11 +11,17 @@ public enum MessageLine: Codable {
 
 public extension MessageLine {
 	init?(string: String) {
+		guard !string.contains("\n")
+		else { return nil }
+
 		let key: String
 		let value: String
 		if let colon = string.firstIndex(of: ":") {
 			key = String(string[..<colon])
-			value = String(string[colon...]).trimmingCharacters(in: .whitespaces)
+			let v = String(string[string.index(after: colon)...])
+			value = v.starts(with: " ")
+			? String(v[v.index(after: v.startIndex)...])
+			: v
 		} else {
 			key = string
 			value = ""
