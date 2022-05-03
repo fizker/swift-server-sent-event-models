@@ -2,6 +2,13 @@ import XCTest
 import ServerSentEventModels
 
 final class MessageEventTests: XCTestCase {
+	func test__init__idSet_lastEventIDSet__bothValuesGetsSetToID() throws {
+		let actual = MessageEvent(lastEventID: "last ID", id: "this ID")
+		let expected = MessageEvent(lastEventID: "this ID", id: "this ID")
+
+		XCTAssertEqual(actual, expected)
+	}
+
 	func test__initWithLines__multipleOfEachLineTypeAvailable__dataIsLineSeparatedFields_otherFieldsSetToLastOfType() throws {
 		let lines: [MessageLine] = [
 			.id("some ID"),
@@ -26,7 +33,12 @@ final class MessageEventTests: XCTestCase {
 			""",
 			eventType: "some other event",
 			lastEventID: "some other ID",
-			id: "some other ID"
+			id: "some other ID",
+			retry: 456,
+			comments: [
+				"some comment",
+				"some other comment",
+			]
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -47,7 +59,11 @@ final class MessageEventTests: XCTestCase {
 			data: "some data",
 			eventType: "some event",
 			lastEventID: "some ID",
-			id: "some ID"
+			id: "some ID",
+			retry: 123,
+			comments: [
+				"some comment",
+			]
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -197,7 +213,7 @@ final class MessageEventTests: XCTestCase {
 		XCTAssertEqual(actual, expected)
 	}
 
-	func test__asLines__multipleLinesOfData_eventTypeSet_lastEventIDPresent_idPresent__returnsExpected() throws {
+	func test__asLines__allFieldsSet__returnsExpected() throws {
 		let message = MessageEvent(
 			data: """
 			some data
@@ -206,7 +222,12 @@ final class MessageEventTests: XCTestCase {
 			""",
 			eventType: "event1",
 			lastEventID: "last ID",
-			id: "this ID"
+			id: "this ID",
+			retry: 123,
+			comments: [
+				"first comment",
+				"second comment",
+			]
 		)
 
 		let actual = message.asLines
@@ -217,6 +238,9 @@ final class MessageEventTests: XCTestCase {
 			.data("lines"),
 			.id("this ID"),
 			.event("event1"),
+			.retry(123),
+			.comment("first comment"),
+			.comment("second comment"),
 		]
 
 		XCTAssertEqual(actual, expected)
