@@ -20,7 +20,7 @@ For an example, see the [Package.swift][demo-package-swift] and the [routes.swif
 For detailed examples on how to use the package, see [the DocC docs][docc].
 
 
-[docc]: https://fizker.github.io/server-sent-event-models/documentation/serversenteventmodels/
+[docc]: https://fizker.github.io/swift-server-sent-event-models/documentation/serversenteventmodels/
 [demo]: https://github.com/fizker/server-sent-events-demo
 [demo-package-swift]: https://github.com/fizker/server-sent-events-demo/blob/main/swift-server/Package.swift
 [demo-routes-swift]: https://github.com/fizker/server-sent-events-demo/blob/main/swift-server/Sources/EventSourceServer/routes.swift
