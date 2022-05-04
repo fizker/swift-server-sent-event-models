@@ -23,12 +23,12 @@ public struct MessageEvent: Codable, Equatable {
 	public var comments: [String] = []
 
 	public init(
-		data: String = "",
-		eventType: String? = nil,
-		lastEventID: String? = nil,
 		id: String? = nil,
+		lastEventID: String? = nil,
+		eventType: String? = nil,
 		retry: Int? = nil,
-		comments: [String] = []
+		comments: [String] = [],
+		data: String = ""
 	) {
 		self.data = data
 		self.eventType = eventType
@@ -69,19 +69,22 @@ public extension MessageEvent {
 	var asLines: [MessageLine] {
 		var lines: [MessageLine] = []
 
+		if let id = id {
+			lines.append(.id(id))
+		}
+
+		if let eventType = eventType {
+			lines.append(.event(eventType))
+		}
+
+		if let retry = retry {
+			lines.append(.retry(retry))
+		}
+
 		if !data.isEmpty {
 			lines.append(contentsOf: data.components(separatedBy: .newlines).map { .data($0) })
 		}
 
-		if let id = id {
-			lines.append(.id(id))
-		}
-		if let eventType = eventType {
-			lines.append(.event(eventType))
-		}
-		if let retry = retry {
-			lines.append(.retry(retry))
-		}
 		lines.append(contentsOf: comments.map(MessageLine.comment))
 
 		return lines

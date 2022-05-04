@@ -27,8 +27,8 @@ extension HTTPClient {
 			let message = MessageEvent(lines: parsedLines)
 		else {
 			let errorMessage = MessageEvent(
-				eventType: "error",
 				lastEventID: lastID,
+				eventType: "error",
 				data: """
 					Maybe include some error data
 					that can help diagnose

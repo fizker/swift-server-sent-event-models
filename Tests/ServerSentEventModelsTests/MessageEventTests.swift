@@ -3,8 +3,8 @@ import ServerSentEventModels
 
 final class MessageEventTests: XCTestCase {
 	func test__init__idSet_lastEventIDSet__bothValuesGetsSetToID() throws {
-		let actual = MessageEvent(lastEventID: "last ID", id: "this ID")
-		let expected = MessageEvent(lastEventID: "this ID", id: "this ID")
+		let actual = MessageEvent(id: "this ID", lastEventID: "last ID")
+		let expected = MessageEvent(id: "this ID", lastEventID: "this ID")
 
 		XCTAssertEqual(actual, expected)
 	}
@@ -27,18 +27,18 @@ final class MessageEventTests: XCTestCase {
 
 		let actual = MessageEvent(lines: lines, lastEventID: "last ID")
 		let expected = MessageEvent(
-			data: """
-			some data
-			some more data
-			""",
-			eventType: "some other event",
-			lastEventID: "some other ID",
 			id: "some other ID",
+			lastEventID: "some other ID",
+			eventType: "some other event",
 			retry: 456,
 			comments: [
 				"some comment",
 				"some other comment",
-			]
+			],
+			data: """
+			some data
+			some more data
+			"""
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -56,14 +56,14 @@ final class MessageEventTests: XCTestCase {
 
 		let actual = MessageEvent(lines: lines, lastEventID: "last ID")
 		let expected = MessageEvent(
-			data: "some data",
-			eventType: "some event",
-			lastEventID: "some ID",
 			id: "some ID",
+			lastEventID: "some ID",
+			eventType: "some event",
 			retry: 123,
 			comments: [
 				"some comment",
-			]
+			],
+			data: "some data"
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -82,10 +82,7 @@ final class MessageEventTests: XCTestCase {
 			some data
 			on multiple
 			lines
-			""",
-			eventType: nil,
-			lastEventID: nil,
-			id: nil
+			"""
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -98,10 +95,9 @@ final class MessageEventTests: XCTestCase {
 
 		let actual = MessageEvent(lines: lines, lastEventID: "last ID")
 		let expected = MessageEvent(
-			data: "",
-			eventType: nil,
+			id: "some ID",
 			lastEventID: "some ID",
-			id: "some ID"
+			data: ""
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -114,10 +110,9 @@ final class MessageEventTests: XCTestCase {
 
 		let actual = MessageEvent(lines: lines, lastEventID: nil)
 		let expected = MessageEvent(
-			data: "",
-			eventType: nil,
+			id: "some ID",
 			lastEventID: "some ID",
-			id: "some ID"
+			data: ""
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -129,10 +124,7 @@ final class MessageEventTests: XCTestCase {
 
 		let actual = MessageEvent(lines: lines, lastEventID: "last ID")
 		let expected = MessageEvent(
-			data: "",
-			eventType: nil,
-			lastEventID: "last ID",
-			id: nil
+			lastEventID: "last ID"
 		)
 
 		XCTAssertEqual(actual, expected)
@@ -143,22 +135,14 @@ final class MessageEventTests: XCTestCase {
 		]
 
 		let actual = MessageEvent(lines: lines, lastEventID: nil)
-		let expected = MessageEvent(
-			data: "",
-			eventType: nil,
-			lastEventID: nil,
-			id: nil
-		)
+		let expected = MessageEvent()
 
 		XCTAssertEqual(actual, expected)
 	}
 
 	func test__asLines__dataEmptyString_lastEventIDPresent_idNotPresent__dataIsNotIncluded_idIsNotIncluded() throws {
 		let message = MessageEvent(
-			data: "",
-			eventType: nil,
-			lastEventID: "last ID",
-			id: nil
+			lastEventID: "last ID"
 		)
 
 		let actual = message.asLines
@@ -175,10 +159,7 @@ final class MessageEventTests: XCTestCase {
 			some data
 			on multiple
 			lines
-			""",
-			eventType: nil,
-			lastEventID: nil,
-			id: nil
+			"""
 		)
 
 		let actual = message.asLines
@@ -194,20 +175,20 @@ final class MessageEventTests: XCTestCase {
 
 	func test__asLines__singleLineOfData_eventTypeSet_lastEventIDPresent_idPresent__returnsExpected() throws {
 		let message = MessageEvent(
+			id: "this ID",
+			lastEventID: "last ID",
+			eventType: "event1",
 			data: """
 			some data
-			""",
-			eventType: "event1",
-			lastEventID: "last ID",
-			id: "this ID"
+			"""
 		)
 
 		let actual = message.asLines
 
 		let expected: [MessageLine] = [
-			.data("some data"),
 			.id("this ID"),
 			.event("event1"),
+			.data("some data"),
 		]
 
 		XCTAssertEqual(actual, expected)
@@ -215,30 +196,30 @@ final class MessageEventTests: XCTestCase {
 
 	func test__asLines__allFieldsSet__returnsExpected() throws {
 		let message = MessageEvent(
-			data: """
-			some data
-			on multiple
-			lines
-			""",
-			eventType: "event1",
-			lastEventID: "last ID",
 			id: "this ID",
+			lastEventID: "last ID",
+			eventType: "event1",
 			retry: 123,
 			comments: [
 				"first comment",
 				"second comment",
-			]
+			],
+			data: """
+			some data
+			on multiple
+			lines
+			"""
 		)
 
 		let actual = message.asLines
 
 		let expected: [MessageLine] = [
-			.data("some data"),
-			.data("on multiple"),
-			.data("lines"),
 			.id("this ID"),
 			.event("event1"),
 			.retry(123),
+			.data("some data"),
+			.data("on multiple"),
+			.data("lines"),
 			.comment("first comment"),
 			.comment("second comment"),
 		]
