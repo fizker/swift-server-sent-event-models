@@ -2,6 +2,9 @@
 
 A brief example of a chat server.
 
+
+## Setup
+
 The server in question is a simple chat-server.
 
 To keep the example on point, it is expected that the infrastructure for the

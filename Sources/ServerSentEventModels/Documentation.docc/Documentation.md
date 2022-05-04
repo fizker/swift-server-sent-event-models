@@ -6,6 +6,7 @@
 
 ### Examples
 
+- <doc:ChatClientExample>
 - <doc:ChatServerExample>
 
 ### ServerSentEventModels
