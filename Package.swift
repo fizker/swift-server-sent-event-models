@@ -6,7 +6,7 @@ let package = Package(
 	name: "swift-server-sent-event-models",
 	products: [
 		.library(
-			name: "serverSentEventModels",
+			name: "ServerSentEventModels",
 			targets: ["ServerSentEventModels"]
 		),
 	],
