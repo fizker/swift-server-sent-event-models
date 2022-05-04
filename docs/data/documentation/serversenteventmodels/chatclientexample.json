@@ -1,0 +1,322 @@
+{
+  "abstract" : [
+    {
+      "text" : "A brief example of a chat client.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatClientExample"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ServerSentEventModels"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Chat Client Example"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Setup",
+          "level" : 2,
+          "text" : "Setup",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "For the sake of this example, imagine a HTTP client that provides an easy way to stream data from the server and return that data as lines. This can be encapsulated as an ",
+              "type" : "text"
+            },
+            {
+              "code" : "AsyncStream",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " that collects the incoming data and yields every time a newline is detected:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "protocol HTTPClient {",
+            "\tvar newlineSeparatedInput: AsyncStream<String> { get }",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Parsing-raw-data",
+          "level" : 2,
+          "text" : "Parsing raw data",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This can easily be extended into ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageEvent",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : "s by collecting all the lines until an empty line is detected:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "extension HTTPClient {",
+            "\tprivate func parseLines(_ lines: [String], lastID: String?) -> MessageEvent {",
+            "\t\tlet maybeLines = lines.map(MessageLine.init(string:))",
+            "\t\tlet parsedLines = maybeLines.compactMap { $0 }",
+            "\t\tguard",
+            "\t\t\t\/\/ We check that no lines became nil",
+            "\t\t\tmaybeLines.count == parsedLines.count,",
+            "\t\t\tlet message = MessageEvent(lines: parsedLines, lastEventID: lastID)",
+            "\t\telse {",
+            "\t\t\tlet errorMessage = MessageEvent(",
+            "\t\t\t\tlastEventID: lastID,",
+            "\t\t\t\teventType: \"error\",",
+            "\t\t\t\tdata: \"\"\"",
+            "\t\t\t\t\tMaybe include some error data",
+            "\t\t\t\t\tthat can help diagnose",
+            "\t\t\t\t\tor handle the error",
+            "\t\t\t\t\t\"\"\"",
+            "\t\t\t)",
+            "\t\t\treturn errorMessage",
+            "\t\t}",
+            "",
+            "\t\treturn message",
+            "\t}",
+            "",
+            "\tvar messages: AsyncStream<MessageEvent> {",
+            "\t\treturn AsyncStream { continuation in",
+            "\t\t\tTask {",
+            "\t\t\t\tvar lastID: String?",
+            "\t\t\t\tvar lines: [String] = []",
+            "\t\t\t\tfor await line in newlineSeparatedInput {",
+            "\t\t\t\t\tif line.isEmpty {",
+            "\t\t\t\t\t\tlet message = parseLines(lines, lastID: lastID)",
+            "\t\t\t\t\t\tlines = []",
+            "",
+            "\t\t\t\t\t\tif let id = message.id {",
+            "\t\t\t\t\t\t\tlastID = id",
+            "\t\t\t\t\t\t}",
+            "",
+            "\t\t\t\t\t\tcontinuation.yield(message)",
+            "\t\t\t\t\t} else {",
+            "\t\t\t\t\t\tlines.append(line)",
+            "\t\t\t\t\t}",
+            "\t\t\t\t}",
+            "\t\t\t}",
+            "\t\t}",
+            "\t}",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Handle-incoming-messages",
+          "level" : 2,
+          "text" : "Handle incoming messages",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Now that we have an easy way to get incoming messages, we can consume this and emit events to the UI:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "func handleData(client: HTTPClient) async throws {",
+            "\tfor await message in client.messages {",
+            "\t\tswitch message.eventType {",
+            "\t\tcase \"error\":",
+            "\t\t\tlog(\"error: \\(message.data)\")",
+            "\t\tcase \"status\":",
+            "\t\t\tonStatusUpdated(message.data)",
+            "\t\tcase \"message\":",
+            "\t\t\tonNewChatMessage(message.data)",
+            "\t\tdefault:",
+            "\t\t\tlog(\"unknown message type: \\(message.eventType ?? \"\")\")",
+            "\t\t}",
+            "\t}",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatServerExample"
+      ],
+      "title" : "Examples"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/serversenteventmodels\/chatclientexample"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ServerSentEventModels/documentation/ServerSentEventModels": {
+  "abstract" : [
+    {
+      "code" : "Codable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " models for handling Server-sent events.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ServerSentEventModels",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/ChatServerExample": {
+  "abstract" : [
+    {
+      "text" : "A brief example of a chat server.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatServerExample",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Chat Server Example",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/chatserverexample"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageEvent": {
+  "abstract" : [
+    {
+      "text" : "A MessageEvent representing multiple ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MessageEvent"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageEvent",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MessageEvent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MessageEvent",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageevent"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine": {
+  "abstract" : [
+    {
+      "text" : "A line in the raw stream of events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MessageLine",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline"
+}
+}
+}

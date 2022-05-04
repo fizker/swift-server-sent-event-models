@@ -1,0 +1,323 @@
+{
+  "abstract" : [
+    {
+      "text" : "A brief example of a chat server.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatServerExample"
+  },
+  "kind" : "article",
+  "metadata" : {
+    "modules" : [
+      {
+        "name" : "ServerSentEventModels"
+      }
+    ],
+    "role" : "article",
+    "roleHeading" : "Article",
+    "title" : "Chat Server Example"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Setup",
+          "level" : 2,
+          "text" : "Setup",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The server in question is a simple chat-server.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "To keep the example on point, it is expected that the infrastructure for the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "server is already in place, and that it supports a continous stream to a client",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "where lines can be easily written.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The server in this example is expected to have a Client object with the following API:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "protocol Client {",
+            "\t\/\/\/ Outputs the given line over HTTP.",
+            "\tfunc writeLine(_ line: String) async throws",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "We extend this for convenience:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "extension Client {",
+            "\t\/\/\/ Writes a message to the output.",
+            "\tfunc write(_ message: MessageEvent) async throws {",
+            "\t\tfor line in message.asLines {",
+            "\t\t\ttry await writeLine(line.asString)",
+            "\t\t}",
+            "",
+            "\t\t\/\/ An empty line ends the message event.",
+            "\t\ttry await writeLine(\"\")",
+            "\t}",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Existing-messages",
+          "level" : 2,
+          "text" : "Existing messages",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The server has a list of messages that have previously been sent. For this example, some messages are already registered:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "var messages: [MessageEvent] = [",
+            "\t.init(",
+            "\t\tid: \"1\",",
+            "\t\teventType: \"status\",",
+            "\t\tdata: \"\"\"",
+            "\t\t\t{",
+            "\t\t\t\t\"room\": \"Friday Night Movies\",",
+            "\t\t\t\t\"participants\": [",
+            "\t\t\t\t\t{ \"id\": \"a\", name: \"Alpha\" },",
+            "\t\t\t\t\t{ \"id\": \"b\", name: \"Beta\" },",
+            "\t\t\t\t\t{ \"id\": \"c\", name: \"Gamma\" }",
+            "\t\t\t\t]",
+            "\t\t\t}",
+            "\t\t\t\"\"\"",
+            "\t),",
+            "\t.init(",
+            "\t\tid: \"2\",",
+            "\t\teventType: \"message\",",
+            "\t\tdata: \"\"\"",
+            "\t\t\t{",
+            "\t\t\t\t\"from\": \"a\",",
+            "\t\t\t\t\"message\": \"Hello world\"",
+            "\t\t\t}",
+            "\t\t\t\"\"\"",
+            "\t),",
+            "\t.init(",
+            "\t\tid: \"3\",",
+            "\t\teventType: \"message\",",
+            "\t\tdata: \"\"\"",
+            "\t\t\t{",
+            "\t\t\t\t\"from\": \"b\",",
+            "\t\t\t\t\"message\": \"Hello Alpha, how are you?\"",
+            "\t\t\t}",
+            "\t\t\t\"\"\"",
+            "\t),",
+            "]"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "New-client",
+          "level" : 2,
+          "text" : "New client",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When the client connects, these are written immediately:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "func onNewClient(_ client: Client) async throws {",
+            "\tself.client = client",
+            "",
+            "\tfor message in messages {",
+            "\t\ttry await client.write(message)",
+            "\t}",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Sending-new-message",
+          "level" : 2,
+          "text" : "Sending new message",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Then later on, a new message is sent:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "func sendNewMessage(message: MessageEvent) async throws {",
+            "\tmessages.append(message)",
+            "\ttry await client.write(message)",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "anchor" : "Reconnecting-clients",
+          "level" : 2,
+          "text" : "Reconnecting clients",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "In the real world, a client might lose connection for a number of reasons. In this case, the client can include the last request they received, and only get the messages that appeared since:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "func onReconnectingClient(_ client: Client, lastEventID: String) async throws {",
+            "\tlet requestedMessages = messages.drop(while: { $0.id != lastEventID }).dropFirst()",
+            "\tfor message in requestedMessages {",
+            "\t\ttry await client.write(message)",
+            "\t}",
+            "}"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatClientExample"
+      ],
+      "title" : "Examples"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/serversenteventmodels\/chatserverexample"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ServerSentEventModels/documentation/ServerSentEventModels": {
+  "abstract" : [
+    {
+      "code" : "Codable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " models for handling Server-sent events.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ServerSentEventModels",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/ChatClientExample": {
+  "abstract" : [
+    {
+      "text" : "A brief example of a chat client.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/ChatClientExample",
+  "kind" : "article",
+  "role" : "article",
+  "title" : "Chat Client Example",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/chatclientexample"
+}
+}
+}

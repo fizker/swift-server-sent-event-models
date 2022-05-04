@@ -1,0 +1,701 @@
+{
+  "abstract" : [
+    {
+      "text" : "A line in the raw stream of events.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:21ServerSentEventModels11MessageLineO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "MessageLine"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ServerSentEventModels"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "MessageLine"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "MessageLine"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "MessageLine"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/Se",
+        "doc:\/\/ServerSentEventModels\/SE",
+        "doc:\/\/ServerSentEventModels\/SQ"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageEvent",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/serverSentEventMIMEType"
+      ],
+      "title" : "ServerSentEventModels"
+    }
+  ],
+  "topicSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/comment(_:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/data(_:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/event(_:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/id(_:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/retry(_:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/unknown(_:_:)"
+      ],
+      "title" : "Enumeration Cases"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(from:)",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(string:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/asString"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/Equatable-Implementations"
+      ],
+      "title" : "Default Implementations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/serversenteventmodels\/messageline"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ServerSentEventModels/SE": {
+  "identifier" : "doc:\/\/ServerSentEventModels\/SE",
+  "title" : "Swift.Encodable",
+  "type" : "unresolvable"
+},
+"doc://ServerSentEventModels/SQ": {
+  "identifier" : "doc:\/\/ServerSentEventModels\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://ServerSentEventModels/Se": {
+  "identifier" : "doc:\/\/ServerSentEventModels\/Se",
+  "title" : "Swift.Decodable",
+  "type" : "unresolvable"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels": {
+  "abstract" : [
+    {
+      "code" : "Codable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " models for handling Server-sent events.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ServerSentEventModels",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageEvent": {
+  "abstract" : [
+    {
+      "text" : "A MessageEvent representing multiple ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MessageEvent"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageEvent",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MessageEvent"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MessageEvent",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageevent"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine": {
+  "abstract" : [
+    {
+      "text" : "A line in the raw stream of events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MessageLine",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/Equatable-Implementations": {
+  "abstract" : [
+
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/Equatable-Implementations",
+  "kind" : "article",
+  "role" : "collectionGroup",
+  "title" : "Equatable Implementations",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/equatable-implementations"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/asString": {
+  "abstract" : [
+    {
+      "text" : "Converts the ",
+      "type" : "text"
+    },
+    {
+      "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+      "isActive" : true,
+      "type" : "reference"
+    },
+    {
+      "text" : " to a raw line.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "asString"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/asString",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "asString",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/asstring"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/comment(_:)": {
+  "abstract" : [
+    {
+      "text" : "A comment line. According to spec, comment lines should be ignored by browsers.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "comment"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/comment(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.comment(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/comment(_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/data(_:)": {
+  "abstract" : [
+    {
+      "text" : "A line of data. Multiple lines of data is allowed in a message.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "data"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/data(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.data(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/data(_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/event(_:)": {
+  "abstract" : [
+    {
+      "text" : "The type of a message.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "event"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/event(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.event(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/event(_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/id(_:)": {
+  "abstract" : [
+    {
+      "text" : "The ID of the message.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "id"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/id(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.id(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/id(_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/init(from:)": {
+  "abstract" : [
+
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "from"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:s7DecoderP",
+      "text" : "Decoder"
+    },
+    {
+      "kind" : "text",
+      "text" : ") "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "throws"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(from:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(from:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/init(from:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/init(string:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a Line by parsing the raw input.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "string"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(string:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(string:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/init(string:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/retry(_:)": {
+  "abstract" : [
+    {
+      "text" : "The number of milliseconds that the reconnection time must be set to.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "retry"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Si",
+      "text" : "Int"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/retry(_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.retry(_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/retry(_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/unknown(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "Unknown key-value pair. This is present to allow lines not currently supported in the spec. The spec says that browsers should ignore unknown lines, so this is safe to include.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unknown"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/unknown(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.unknown(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/unknown(_:_:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/serverSentEventMIMEType": {
+  "abstract" : [
+    {
+      "text" : "The MIME type that Server-sent events should be using over HTTP.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "serverSentEventMIMEType"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/serverSentEventMIMEType",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "serverSentEventMIMEType",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/serversenteventmimetype"
+}
+}
+}

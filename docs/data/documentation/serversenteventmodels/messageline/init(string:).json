@@ -1,0 +1,334 @@
+{
+  "abstract" : [
+    {
+      "text" : "Creates a Line by parsing the raw input.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels",
+        "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(string:)"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "extendedModule" : "ServerSentEventModels",
+    "externalID" : "s:21ServerSentEventModels11MessageLineO6stringACSgSS_tcfc",
+    "fragments" : [
+      {
+        "kind" : "identifier",
+        "text" : "init"
+      },
+      {
+        "kind" : "text",
+        "text" : "?("
+      },
+      {
+        "kind" : "externalParam",
+        "text" : "string"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:SS",
+        "text" : "String"
+      },
+      {
+        "kind" : "text",
+        "text" : ")"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "ServerSentEventModels"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(string:)"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "init"
+            },
+            {
+              "kind" : "text",
+              "text" : "?("
+            },
+            {
+              "kind" : "externalParam",
+              "text" : "string"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SS",
+              "text" : "String"
+            },
+            {
+              "kind" : "text",
+              "text" : ")"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "return-value",
+          "level" : 2,
+          "text" : "Return Value",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " of the appropriate type, ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/unknown(_:_:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " if an unknown or invalid key is present or ",
+              "type" : "text"
+            },
+            {
+              "code" : "nil",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " if the line contains a newline character.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "A raw input line.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "string"
+        }
+      ]
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 2,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/serversenteventmodels\/messageline\/init(string:)"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://ServerSentEventModels/documentation/ServerSentEventModels": {
+  "abstract" : [
+    {
+      "code" : "Codable",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " models for handling Server-sent events.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "ServerSentEventModels",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine": {
+  "abstract" : [
+    {
+      "text" : "A line in the raw stream of events.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "MessageLine"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "MessageLine",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/init(string:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a Line by parsing the raw input.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "?("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "string"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/init(string:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(string:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/init(string:)"
+},
+"doc://ServerSentEventModels/documentation/ServerSentEventModels/MessageLine/unknown(_:_:)": {
+  "abstract" : [
+    {
+      "text" : "Unknown key-value pair. This is present to allow lines not currently supported in the spec. The spec says that browsers should ignore unknown lines, so this is safe to include.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "case"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "unknown"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:SS",
+      "text" : "String"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/ServerSentEventModels\/documentation\/ServerSentEventModels\/MessageLine\/unknown(_:_:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "MessageLine.unknown(_:_:)",
+  "type" : "topic",
+  "url" : "\/documentation\/serversenteventmodels\/messageline\/unknown(_:_:)"
+}
+}
+}
