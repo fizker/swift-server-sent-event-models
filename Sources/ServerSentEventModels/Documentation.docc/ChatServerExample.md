@@ -114,7 +114,7 @@ In the real world, a client might lose connection for a number of reasons. In th
 
 ```swift
 func onReconnectingClient(_ client: Client, lastEventID: String) async throws {
-	let requestedMessages = messages.drop(while: { $0.id != lastEventID })
+	let requestedMessages = messages.drop(while: { $0.id != lastEventID }).dropFirst()
 	for message in requestedMessages {
 		try await client.write(message)
 	}

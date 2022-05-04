@@ -9,7 +9,7 @@ For the sake of this example, imagine a HTTP client that provides an easy way to
 
 ```swift
 protocol HTTPClient {
-	var newlineSeparatedInput: AsyncStream<String>
+	var newlineSeparatedInput: AsyncStream<String> { get }
 }
 ```
 
@@ -21,10 +21,12 @@ This can easily be extended into ``MessageEvent``s by collecting all the lines u
 ```swift
 extension HTTPClient {
 	private func parseLines(_ lines: [String], lastID: String?) -> MessageEvent {
+		let maybeLines = lines.map(MessageLine.init(string:))
+		let parsedLines = maybeLines.compactMap { $0 }
 		guard
-			// TODO: MessageLine init is failable, we need to handle this properly. Maybe should throw?
-			let parsedLines = lines.map(MessageLine.init(string:)),
-			let message = MessageEvent(lines: parsedLines)
+			// We check that no lines became nil
+			maybeLines.count == parsedLines.count,
+			let message = MessageEvent(lines: parsedLines, lastEventID: lastID)
 		else {
 			let errorMessage = MessageEvent(
 				lastEventID: lastID,
@@ -43,20 +45,22 @@ extension HTTPClient {
 
 	var messages: AsyncStream<MessageEvent> {
 		return AsyncStream { continuation in
-			var lastID: String?
-			var lines: [String] = []
-			for line in await newlineSeparatedInput {
-				if line.isEmpty {
-					let message = parseLines(lines, lastID: lastID)
-					lines = []
+			Task {
+				var lastID: String?
+				var lines: [String] = []
+				for await line in newlineSeparatedInput {
+					if line.isEmpty {
+						let message = parseLines(lines, lastID: lastID)
+						lines = []
 
-					if let id = message.id {
-						lastID = id
+						if let id = message.id {
+							lastID = id
+						}
+
+						continuation.yield(message)
+					} else {
+						lines.append(line)
 					}
-
-					continuation.yield(message)
-				} else {
-					lines.append(line)
 				}
 			}
 		}
@@ -71,7 +75,7 @@ Now that we have an easy way to get incoming messages, we can consume this and e
 
 ```swift
 func handleData(client: HTTPClient) async throws {
-	for message in await client.messages {
+	for await message in client.messages {
 		switch message.eventType {
 		case "error":
 			log("error: \(message.data)")
@@ -80,7 +84,7 @@ func handleData(client: HTTPClient) async throws {
 		case "message":
 			onNewChatMessage(message.data)
 		default:
-			log("unknown message type: \(message.eventType)")
+			log("unknown message type: \(message.eventType ?? "")")
 		}
 	}
 }
